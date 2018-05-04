@@ -1,0 +1,1736 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lesson01}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Úvod do dátovej analýzy v Pythone
+
+    Čo je dátová analýza?
+
+Tento pojem je pomerne ťažké definovať. Pod dátovou analýzou sa skrýva
+viacero rolí a činností a nie vždy sú vykonávané jednou osobou. Patria
+sem napríklad činnosti:
+
+\begin{verbatim}
+<li>analýza dát</li>
+<li>čistenie dát</li>
+<li>transformácia dát</li>
+<li>vizualizácia dát</li>
+<li>návrh dátovej architektúry</li>
+<li>machine learning</li>
+<li>dátové modelovanie</li>
+<li>....</li>
+\end{verbatim}
+
+    Prečo Python?
+
+Pri práci s dátami si môžeme vybrať rôzny programovací jazyk, no
+najčastejšie sa používa buď Python alebo R. Výber závisí od viacerých
+faktorov:
+
+\begin{verbatim}
+<li>use case, na ktorom pracujeme</li>
+<li>dáta, s akými pracujeme</li>
+<li>tím, v ktorom pracujeme</li>
+<li>technológie vybranej firmy/projektu a ich možnosti</li>
+<li>dodatočné knižnice/moduly vybraného jazyka</li>
+<li>objem dát, s akými pracujeme</li>
+<li>dostupné nástroje na prácu s dátami</li>
+<li>...</li>
+\end{verbatim}
+
+Python nám umožňuje pracovať s veľkými dátovými setmi, vizualizovať dáta
+pomocou rôznych knižníc/modulov, podporuje mnoho machine learning
+knižníc/modulov.
+
+Ukážky prác s dátami v Pythone
+
+    \begin{verbatim}
+<li>http://nbviewer.jupyter.org/github/justmarkham/DAT4/blob/master/notebooks/08_linear_regression.ipynb</li>
+<li>http://nbviewer.jupyter.org/github/xun-tang/pyladies_jupyter_demo/blob/master/Predict_Review_Five_Star_Rating.ipynb</li>
+<li>http://nbviewer.jupyter.org/gist/msund/7ac1203ded66fe8134cc</li>
+<li>http://nbviewer.jupyter.org/gist/jhemann/4569783</li>
+\end{verbatim}
+
+    Čo je Jupyter notebook?
+
+Jupyter notebook je interaktívny nástroj umožňujúci priamo vizualizovať
+výsledky spracovania nášho kódu. V kontexte práce s dátami je možné sa
+priamo na dáta pozrieť, vypísať hodnoty bez nutnosti printu. Uchováva
+históriu našej práce prostredníctvom {[}in{]} - vstupné hodnoty
+{[}out{]} - výsledkov našich programov. Umožňuje embedovať rôzne
+dodatočné prvky ako mapy, videá, podporuje html formátovanie, webové
+stránky a vizualizácie.
+
+S Jupyteru je možné priamo výsledky našej práce publikovať online,
+previesť do Python kódu a skopírovať do nášho obľúbeného editora. Je
+potrebné si uvedomiť, že beží iba lokálne v našom počítači vo webovom
+prehliadači.
+
+Prečo je dobré ho používať?
+
+Využívanie Jupyter notebooku má mnoho výhod, najmä pri práci v oblasti
+dátovej analýzy:
+
+\begin{verbatim}
+<li>Priamo zobrazenie dát, s ktorými pracujeme - nie je nutné sa prepínať do externých excelov, csv súborov, databáz,...</li>
+<li>Možnosť vidieť výsledky spracovania kódu priamo v prehliadači bez nutnosti spúšťania kódu cez konzolu/terminál a zároveň sú výsledky uložené v histórii a dostupné aj po znovuotvorení Jupyter notebooku</li>
+<li>Možnosť priamych vizualizácií</li>
+<li>Využívaný nástroj medzi dátovými analytikmi pracujúcimi v Pythone/inom jazyku, pravdepodobne väčšina Vašich kolegov tento nástroj bude používať a pošle vám v ňom svoju prácu</li>
+<li>Možnosť publikácie výsledkov priamo online</li>
+<li>Je zadarmo dostupný</li>
+<li> ...</li>
+\end{verbatim}
+
+    Je dobré vedieť
+
+\begin{verbatim}
+<li>Vypísanie všetkých dostupných príkazov a skratiek k nim cez <code>Cmd/Ctrl + Shift + P</code></li>
+<li>Spustiť kód bloku programu vo vybranej bunky príkazom Run</li>
+<li>Môžeme sa prepnúť navrchu medzi Markdown, Code</li>
+<li>Môžeme zastaviť vykonávanie príkazu cez Stop</li>
+<li>Môžeme spustiť beh všetkých príkazov naraz</li>
+<li>Môžeme si vypísať nápovedu cez .</li>
+<li>Môžeme si vypísať help k danej funkcii/metóde</li>
+<li>Môžeme cez tabulátor dopĺňať existujúce premenné, funkcie, metódy</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} print\PY{o}{?}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+    \end{Verbatim}
+
+    Čo je Pandas?
+
+Pandas je modul/knižnica Pythonu slúžiaca na prácu s dátami v Pythone.
+Umožňuje nám pracovať s dátami v ucelenej štruktúre, podobnej relačným
+databázam. Umožňuje spracovať veľké množstvo dát pomerne rýchlo,
+vyhodnocovať dáta, čistiť dáta vďaka mnohým zabudovaným a pripraveným
+funkciám, ktoré šetria dátovému analytikovi mnoho času, ktorý zameria
+efektívnejšie na data analýzu, ako na programovanie v Pythone.
+
+Je potrebné si uvedomiť, že pri práci s Pandasom je dôležité naučiť sa
+funkcie/metódy, ktoré poskytuje a ako ich uplatniť nad dátovým setom, s
+ktorým pracujeme. Nejde priamo o programovanie, aké poznáte z Pythonu, o
+to programovanie sa postarali už tvorcovia Pandasu a všetko potrebné
+zabudovali do danej knižnice/modulu
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}231}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Ukážka v Pythone\PYZlt{}br /\PYZgt{}}
+          \PY{l+s+sd}{import csv}
+          
+          \PY{l+s+sd}{if \PYZus{}\PYZus{}name\PYZus{}\PYZus{} == \PYZsq{}\PYZus{}\PYZus{}main\PYZus{}\PYZus{}\PYZsq{}:}
+          \PY{l+s+sd}{    file\PYZus{}name = \PYZsq{}teams\PYZsq{}}
+          \PY{l+s+sd}{    with open(file\PYZus{}name + \PYZsq{}.csv\PYZsq{}, \PYZsq{}r\PYZsq{}) as infile:}
+          \PY{l+s+sd}{        reader = csv.reader(infile)}
+          \PY{l+s+sd}{        new\PYZus{}header = next(reader, None)}
+          \PY{l+s+sd}{        for row in reader:}
+          \PY{l+s+sd}{            row = [row[0], row[1], row[2]]}
+          \PY{l+s+sd}{            print (row)}
+          
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}231}]:} "Ukážka v Pythone<br />\textbackslash{}nimport csv\textbackslash{}n\textbackslash{}nif \_\_name\_\_ == '\_\_main\_\_':\textbackslash{}n    file\_name = 'teams'\textbackslash{}n    with open(file\_name + '.csv', 'r') as infile:\textbackslash{}n        reader = csv.reader(infile)\textbackslash{}n        new\_header = next(reader, None)\textbackslash{}n        for row in reader:\textbackslash{}n            row = [row[0], row[1], row[2]]\textbackslash{}n            print (row)\textbackslash{}n\textbackslash{}n"
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}232}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} Ukážka v Pandase}
+          \PY{l+s+sd}{df = pd.read\PYZus{}csv(\PYZsq{}teams.csv\PYZsq{}, encoding=\PYZsq{}utf\PYZhy{}8\PYZsq{})}
+          \PY{l+s+sd}{df[[\PYZsq{}1\PYZsq{}, \PYZsq{}2\PYZsq{}, \PYZsq{}3\PYZsq{}]]}
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}232}]:} " Ukážka v Pandase\textbackslash{}ndf = pd.read\_csv('teams.csv', encoding='utf-8')\textbackslash{}ndf[['1', '2', '3']]\textbackslash{}n"
+\end{Verbatim}
+            
+    Začiatok práce s Pandasom
+
+\begin{verbatim}
+<li>Ako každý Python modul, je potrebné ho nainštalovať, aby sme ho mohli používať. V anaconde, by mal byť Pandas preddefinovane nainštalovaný.</li>
+<li>Po nainštalovaní je potrebné si ho importovať do nášho projektu. Importovaním pandasu môžeme používať všetky jeho hotové funkcie a metódy, ktoré pre nás pripravili</li>
+\end{verbatim}
+
+    Import
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}Import celého pandas modulu, kde sme si vytvorili alias pd, pre možnosť pristupovať k príkazom cez skratku pd.}
+        \PY{c+c1}{\PYZsh{}namiest pandas.}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    Keď máme pandas importnutý je potrebné si do projektu nahrať dáta, nad
+ktorými chceme pracovať, robiť dátovú analýzu. V pandase je možné
+pracovať s dátami rôznych dátových formátov, či už je to excel, textový
+súbor, csv, json a podobne.
+
+Ukážky otvorenia dát v rôznych formátoch.
+
+    Načíta dáta z CSV súboru
+
+pd.read\_csv(filename)
+
+Načíta dáta z Excel súboru
+
+pd.read\_excel(filename)
+
+Načíta dáta z SQL tabuľky/databázy
+
+pd.read\_sql(query, connection\_object)
+
+Načíta dáta z JSONU z webu
+
+pd.read\_json(json\_string)
+
+Načíta dáta z URL adresy
+
+pd.read\_html(url)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}json}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://czechitas\PYZhy{}app.herokuapp.com/api/v1/courses/open/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}                            contact\_person            couches  \textbackslash{}
+        0  \{'id': 4, 'user': 'info@czechitas.cz'\}      Anna Pascenko   
+        1  \{'id': 4, 'user': 'info@czechitas.cz'\}        Pavel Lasák   
+        2  \{'id': 4, 'user': 'info@czechitas.cz'\}                      
+        3  \{'id': 4, 'user': 'info@czechitas.cz'\}  Martina Votrubová   
+        4  \{'id': 4, 'user': 'info@czechitas.cz'\}         Pavel Ungr   
+        
+                                             course\_category  \textbackslash{}
+        0  \{'id': 2, 'title': 'I can code!', 'color\_code'{\ldots}   
+        1  \{'id': 11, 'title': 'Exceluju!', 'color\_code':{\ldots}   
+        2  \{'id': 2, 'title': 'I can code!', 'color\_code'{\ldots}   
+        3  \{'id': 13, 'title': 'Jsem digitální', 'color\_c{\ldots}   
+        4  \{'id': 13, 'title': 'Jsem digitální', 'color\_c{\ldots}   
+        
+                                          course\_description       course\_end\_date  \textbackslash{}
+        0  Have you already implemented any application o{\ldots}  2016-11-26T16:30:00Z   
+        1  Máme tady další Excel workshop, protože vás po{\ldots}  2016-12-03T16:30:00Z   
+        2  Láká tě programování, ale vůbec nevíš, jak bys{\ldots}  2016-12-03T17:00:00Z   
+        3  Sociální sítě dnes používá snad každý, ale víš{\ldots}  2016-11-23T19:00:00Z   
+        4  Nejen programování je člověk živ, a proto ti p{\ldots}  2016-11-28T20:00:00Z   
+        
+           course\_price     course\_start\_date  \textbackslash{}
+        0           300  2016-11-26T08:30:00Z   
+        1           300  2016-12-03T08:00:00Z   
+        2           300  2016-12-03T09:00:00Z   
+        3           300  2016-11-23T16:00:00Z   
+        4           300  2016-11-28T17:00:00Z   
+        
+                                                course\_venue  id  \textbackslash{}
+        0  \{'id': 11, 'title': 'Konica Minolta', 'street\_{\ldots}  67   
+        1  \{'id': 3, 'title': 'Fakulta informatiky Masary{\ldots}  66   
+        2  \{'id': 1, 'title': 'Impact Hub', 'street\_name'{\ldots}  65   
+        3  \{'id': 5, 'title': 'CERGE-EI', 'street\_name': {\ldots}  58   
+        4  \{'id': 7, 'title': 'Impact Hub', 'street\_name'{\ldots}  59   
+        
+                                        interested\_form\_link  max\_capacity  \textbackslash{}
+        0  https://docs.google.com/forms/d/e/1FAIpQLSfrtC{\ldots}           NaN   
+        1  https://docs.google.com/forms/d/e/1FAIpQLSfrtC{\ldots}           NaN   
+        2  https://docs.google.com/forms/d/e/1FAIpQLSfrtC{\ldots}           NaN   
+        3             https://goo.gl/forms/DhfY21CiwIasezAY2           NaN   
+        4             https://goo.gl/forms/DhfY21CiwIasezAY2           NaN   
+        
+                                                       notes  open\_registration  \textbackslash{}
+        0                                                                  True   
+        1  Osnova workshopu:\textbackslash{}r\textbackslash{}n– Základy + pár efektivní{\ldots}               True   
+        2  Vlastní notebook, myš (není nutná, ale bude se{\ldots}               True   
+        3                      Blok a tužku a dobrou náladu!               True   
+        4  Vlastní notebook, myš (není nutná, ale bude se{\ldots}               True   
+        
+           publish                             registration\_form\_link repeat  \textbackslash{}
+        0     True  https://docs.google.com/forms/d/e/1FAIpQLSfrtC{\ldots}          
+        1     True  https://docs.google.com/forms/d/e/1FAIpQLSfrtC{\ldots}          
+        2     True  https://docs.google.com/forms/d/e/1FAIpQLSfrtC{\ldots}          
+        3     True             https://goo.gl/forms/DhfY21CiwIasezAY2          
+        4     True             https://goo.gl/forms/DhfY21CiwIasezAY2          
+        
+                                                title  
+        0      I can code!: Introduction to databases  
+        1                              Excel workshop  
+        2                        Úvod do programování  
+        3              Jsem digitální!: Sociální sítě  
+        4  Jsem digitální!: SEO interaktivní workshop  
+\end{Verbatim}
+            
+    My budeme pracovať na hodinách s formátom CSV. Jedná sa o
+najvyužívanejší formát pri práci s dátami, mnoho exportov z JSONu z
+rôznych nástrojov, alebo z databáz je vo formáte CSV.
+
+Predstavenie dátového setu
+
+Budeme pracovať s dátovým setom obsahujúcim informácie o Pokémonoch.
+Pracovať budeme s hodnotami:
+
+\begin{verbatim}
+<li>ID pokémona</li>
+<li>Meno pokémona</li>
+<li>Typ (hlavný) pokémona</li>
+<li>Typ (vedľajší) pokémona</li>
+<li>Celková sila</li>
+<li>Útok</li>
+<li>HP </li>
+<li>Obrana</li>
+<li>Rýchlosť</li>
+<li>Generácia</li>
+<li>Je legendárny</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}Načítanie dát z CSV súboru}
+        \PY{n}{pokemonDf} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csvs/Pokemon.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Čo je DateFrame?
+
+DateFrame je v pandase tabuľková dátová štruktúra (založená na podobnom
+princípe ako napríklad usporiadanie dát v Exceli alebo v databáze),
+obsahujúca dáta zoradené v stĺpcoch. Každý stĺpec má rôzny dátový typ.
+Dátovym typom je napríklad číslo, desatiné číslo, text, pravdivostná
+hodnota (True/False) a iné. Pod každým stĺpcom sú dáta zobrazované v
+riadkoch v danom dátovom type
+
+    Základný výpis dát
+
+Dáta sú v tejto chvíli uložené v premennej s názvom pokemonDf. Ak sa na
+ne chceme pozrieť, môžeme použiť nasledujúce spôsoby:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}Vypíše všetky dáta, ktoré sa načítali z CSV súboru. Ak je dát viac zobrazia sa medzi nimi ... }
+        \PY{n}{pokemonDf}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}        \#                       Name    Type 1  Type 2  Total   HP  Attack  \textbackslash{}
+        0      1                  Bulbasaur     Grass  Poison    318   45      49   
+        1      2                    Ivysaur     Grass  Poison    405   60      62   
+        2      3                   Venusaur     Grass  Poison    525   80      82   
+        3      3      VenusaurMega Venusaur     Grass  Poison    625   80     100   
+        4      4                 Charmander      Fire     NaN    309   39      52   
+        5      5                 Charmeleon      Fire     NaN    405   58      64   
+        6      6                  Charizard      Fire  Flying    534   78      84   
+        7      6  CharizardMega Charizard X      Fire  Dragon    634   78     130   
+        8      6  CharizardMega Charizard Y      Fire  Flying    634   78     104   
+        9      7                   Squirtle     Water     NaN    314   44      48   
+        10     8                  Wartortle     Water     NaN    405   59      63   
+        11     9                  Blastoise     Water     NaN    530   79      83   
+        12     9    BlastoiseMega Blastoise     Water     NaN    630   79     103   
+        13    10                   Caterpie       Bug     NaN    195   45      30   
+        14    11                    Metapod       Bug     NaN    205   50      20   
+        15    12                 Butterfree       Bug  Flying    395   60      45   
+        16    13                     Weedle       Bug  Poison    195   40      35   
+        17    14                     Kakuna       Bug  Poison    205   45      25   
+        18    15                   Beedrill       Bug  Poison    395   65      90   
+        19    15      BeedrillMega Beedrill       Bug  Poison    495   65     150   
+        20    16                     Pidgey    Normal  Flying    251   40      45   
+        21    17                  Pidgeotto    Normal  Flying    349   63      60   
+        22    18                    Pidgeot    Normal  Flying    479   83      80   
+        23    18        PidgeotMega Pidgeot    Normal  Flying    579   83      80   
+        24    19                    Rattata    Normal     NaN    253   30      56   
+        25    20                   Raticate    Normal     NaN    413   55      81   
+        26    21                    Spearow    Normal  Flying    262   40      60   
+        27    22                     Fearow    Normal  Flying    442   65      90   
+        28    23                      Ekans    Poison     NaN    288   35      60   
+        29    24                      Arbok    Poison     NaN    438   60      85   
+        ..   {\ldots}                        {\ldots}       {\ldots}     {\ldots}    {\ldots}  {\ldots}     {\ldots}   
+        770  700                    Sylveon     Fairy     NaN    525   95      65   
+        771  701                   Hawlucha  Fighting  Flying    500   78      92   
+        772  702                    Dedenne  Electric   Fairy    431   67      58   
+        773  703                    Carbink      Rock   Fairy    500   50      50   
+        774  704                      Goomy    Dragon     NaN    300   45      50   
+        775  705                    Sliggoo    Dragon     NaN    452   68      75   
+        776  706                     Goodra    Dragon     NaN    600   90     100   
+        777  707                     Klefki     Steel   Fairy    470   57      80   
+        778  708                   Phantump     Ghost   Grass    309   43      70   
+        779  709                  Trevenant     Ghost   Grass    474   85     110   
+        780  710      PumpkabooAverage Size     Ghost   Grass    335   49      66   
+        781  710        PumpkabooSmall Size     Ghost   Grass    335   44      66   
+        782  710        PumpkabooLarge Size     Ghost   Grass    335   54      66   
+        783  710        PumpkabooSuper Size     Ghost   Grass    335   59      66   
+        784  711      GourgeistAverage Size     Ghost   Grass    494   65      90   
+        785  711        GourgeistSmall Size     Ghost   Grass    494   55      85   
+        786  711        GourgeistLarge Size     Ghost   Grass    494   75      95   
+        787  711        GourgeistSuper Size     Ghost   Grass    494   85     100   
+        788  712                   Bergmite       Ice     NaN    304   55      69   
+        789  713                    Avalugg       Ice     NaN    514   95     117   
+        790  714                     Noibat    Flying  Dragon    245   40      30   
+        791  715                    Noivern    Flying  Dragon    535   85      70   
+        792  716                    Xerneas     Fairy     NaN    680  126     131   
+        793  717                    Yveltal      Dark  Flying    680  126     131   
+        794  718           Zygarde50\% Forme    Dragon  Ground    600  108     100   
+        795  719                    Diancie      Rock   Fairy    600   50     100   
+        796  719        DiancieMega Diancie      Rock   Fairy    700   50     160   
+        797  720        HoopaHoopa Confined   Psychic   Ghost    600   80     110   
+        798  720         HoopaHoopa Unbound   Psychic    Dark    680   80     160   
+        799  721                  Volcanion      Fire   Water    600   80     110   
+        
+             Defense  Sp. Atk  Sp. Def  Speed  Generation  Legendary  
+        0         49       65       65     45           1      False  
+        1         63       80       80     60           1      False  
+        2         83      100      100     80           1      False  
+        3        123      122      120     80           1      False  
+        4         43       60       50     65           1      False  
+        5         58       80       65     80           1      False  
+        6         78      109       85    100           1      False  
+        7        111      130       85    100           1      False  
+        8         78      159      115    100           1      False  
+        9         65       50       64     43           1      False  
+        10        80       65       80     58           1      False  
+        11       100       85      105     78           1      False  
+        12       120      135      115     78           1      False  
+        13        35       20       20     45           1      False  
+        14        55       25       25     30           1      False  
+        15        50       90       80     70           1      False  
+        16        30       20       20     50           1      False  
+        17        50       25       25     35           1      False  
+        18        40       45       80     75           1      False  
+        19        40       15       80    145           1      False  
+        20        40       35       35     56           1      False  
+        21        55       50       50     71           1      False  
+        22        75       70       70    101           1      False  
+        23        80      135       80    121           1      False  
+        24        35       25       35     72           1      False  
+        25        60       50       70     97           1      False  
+        26        30       31       31     70           1      False  
+        27        65       61       61    100           1      False  
+        28        44       40       54     55           1      False  
+        29        69       65       79     80           1      False  
+        ..       {\ldots}      {\ldots}      {\ldots}    {\ldots}         {\ldots}        {\ldots}  
+        770       65      110      130     60           6      False  
+        771       75       74       63    118           6      False  
+        772       57       81       67    101           6      False  
+        773      150       50      150     50           6      False  
+        774       35       55       75     40           6      False  
+        775       53       83      113     60           6      False  
+        776       70      110      150     80           6      False  
+        777       91       80       87     75           6      False  
+        778       48       50       60     38           6      False  
+        779       76       65       82     56           6      False  
+        780       70       44       55     51           6      False  
+        781       70       44       55     56           6      False  
+        782       70       44       55     46           6      False  
+        783       70       44       55     41           6      False  
+        784      122       58       75     84           6      False  
+        785      122       58       75     99           6      False  
+        786      122       58       75     69           6      False  
+        787      122       58       75     54           6      False  
+        788       85       32       35     28           6      False  
+        789      184       44       46     28           6      False  
+        790       35       45       40     55           6      False  
+        791       80       97       80    123           6      False  
+        792       95      131       98     99           6       True  
+        793       95      131       98     99           6       True  
+        794      121       81       95     95           6       True  
+        795      150      100      150     50           6       True  
+        796      110      160      110    110           6       True  
+        797       60      150      130     70           6       True  
+        798       60      170      130     80           6       True  
+        799      120      130       90     70           6       True  
+        
+        [800 rows x 13 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{n}{pokemonDf} \PY{o}{=} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}138}]:}                     Name   Type 1 Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                               
+          719              Diancie     Rock  Fairy    600  50     100      150      100   
+          719  DiancieMega Diancie     Rock  Fairy    700  50     160      110      160   
+          720  HoopaHoopa Confined  Psychic  Ghost    600  80     110       60      150   
+          720   HoopaHoopa Unbound  Psychic   Dark    680  80     160       60      170   
+          721            Volcanion     Fire  Water    600  80     110      120      130   
+          
+               Sp. Def  Speed  Generation  Legendary  
+          \#                                           
+          719      150     50           6       True  
+          719      110    110           6       True  
+          720      130     70           6       True  
+          720      130     80           6       True  
+          721       90     70           6       True  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{c+c1}{\PYZsh{}Vypíše počet riadkov a stĺpcov dátového setu}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}139}]:} (800, 12)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}140}]:} Index(['Name', 'Type 1', 'Type 2', 'Total', 'HP', 'Attack', 'Defense',
+                 'Sp. Atk', 'Sp. Def', 'Speed', 'Generation', 'Legendary'],
+                dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{c+c1}{\PYZsh{}Vypíše defaultne prvých 5 riadkov dátového setu}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}141}]:}                     Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                              
+          1              Bulbasaur  Grass  Poison    318  45      49       49       65   
+          2                Ivysaur  Grass  Poison    405  60      62       63       80   
+          3               Venusaur  Grass  Poison    525  80      82       83      100   
+          3  VenusaurMega Venusaur  Grass  Poison    625  80     100      123      122   
+          4             Charmander   Fire     NaN    309  39      52       43       60   
+          
+             Sp. Def  Speed  Generation  Legendary  
+          \#                                         
+          1       65     45           1      False  
+          2       80     60           1      False  
+          3      100     80           1      False  
+          3      120     80           1      False  
+          4       50     65           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} \PY{c+c1}{\PYZsh{}Vypíše defaultne posledných 5 riadkov dátového setu}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}142}]:}                     Name   Type 1 Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                               
+          719              Diancie     Rock  Fairy    600  50     100      150      100   
+          719  DiancieMega Diancie     Rock  Fairy    700  50     160      110      160   
+          720  HoopaHoopa Confined  Psychic  Ghost    600  80     110       60      150   
+          720   HoopaHoopa Unbound  Psychic   Dark    680  80     160       60      170   
+          721            Volcanion     Fire  Water    600  80     110      120      130   
+          
+               Sp. Def  Speed  Generation  Legendary  
+          \#                                           
+          719      150     50           6       True  
+          719      110    110           6       True  
+          720      130     70           6       True  
+          720      130     80           6       True  
+          721       90     70           6       True  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} \PY{c+c1}{\PYZsh{}Vypíše prvných n riadkov, napríklad 3}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}143}]:}         Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  Sp. Def  \textbackslash{}
+          \#                                                                           
+          1  Bulbasaur  Grass  Poison    318  45      49       49       65       65   
+          2    Ivysaur  Grass  Poison    405  60      62       63       80       80   
+          3   Venusaur  Grass  Poison    525  80      82       83      100      100   
+          
+             Speed  Generation  Legendary  
+          \#                                
+          1     45           1      False  
+          2     60           1      False  
+          3     80           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{c+c1}{\PYZsh{}Vypíše posledných n riadkov, napríklad 3}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}144}]:}                     Name   Type 1 Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                               
+          720  HoopaHoopa Confined  Psychic  Ghost    600  80     110       60      150   
+          720   HoopaHoopa Unbound  Psychic   Dark    680  80     160       60      170   
+          721            Volcanion     Fire  Water    600  80     110      120      130   
+          
+               Sp. Def  Speed  Generation  Legendary  
+          \#                                           
+          720      130     70           6       True  
+          720      130     80           6       True  
+          721       90     70           6       True  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{c+c1}{\PYZsh{}Vypíše nám ku každému stĺpcu jeho názov, dátovy typ, či obsahuje nulové hodnoty a počet riadkov \PYZhy{} vyplnených hodnôt}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 800 entries, 1 to 721
+Data columns (total 12 columns):
+Name          800 non-null object
+Type 1        800 non-null object
+Type 2        414 non-null object
+Total         800 non-null int64
+HP            800 non-null int64
+Attack        800 non-null int64
+Defense       800 non-null int64
+Sp. Atk       800 non-null int64
+Sp. Def       800 non-null int64
+Speed         800 non-null int64
+Generation    800 non-null int64
+Legendary     800 non-null bool
+dtypes: bool(1), int64(8), object(3)
+memory usage: 75.8+ KB
+
+    \end{Verbatim}
+
+    Úlohy:
+
+\begin{verbatim}
+<li>Vypíš prvých 7 riadkov z dátového setu pokemonDf</li>
+<li>Vypíš posledné 2 riadky z dátového setu pokemonDf</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{c+c1}{\PYZsh{}1}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}146}]:}                     Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                              
+          1              Bulbasaur  Grass  Poison    318  45      49       49       65   
+          2                Ivysaur  Grass  Poison    405  60      62       63       80   
+          3               Venusaur  Grass  Poison    525  80      82       83      100   
+          3  VenusaurMega Venusaur  Grass  Poison    625  80     100      123      122   
+          4             Charmander   Fire     NaN    309  39      52       43       60   
+          5             Charmeleon   Fire     NaN    405  58      64       58       80   
+          6              Charizard   Fire  Flying    534  78      84       78      109   
+          
+             Sp. Def  Speed  Generation  Legendary  
+          \#                                         
+          1       65     45           1      False  
+          2       80     60           1      False  
+          3      100     80           1      False  
+          3      120     80           1      False  
+          4       50     65           1      False  
+          5       65     80           1      False  
+          6       85    100           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}147}]:} \PY{c+c1}{\PYZsh{}2}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}147}]:}                    Name   Type 1 Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                              
+          720  HoopaHoopa Unbound  Psychic   Dark    680  80     160       60      170   
+          721           Volcanion     Fire  Water    600  80     110      120      130   
+          
+               Sp. Def  Speed  Generation  Legendary  
+          \#                                           
+          720      130     80           6       True  
+          721       90     70           6       True  
+\end{Verbatim}
+            
+    Výpis dát a pristupovanie k hodnotám/dátam
+
+K dátam a ich hodnotám môžeme v pandase pristupovať rôznymi spôsobmi.
+Ukážeme si najvyužívanejšie z nich a rozdiely medzi nimi
+
+    Práca so stĺpcami
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}148}]:} \PY{n}{pokemonDf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}148}]:} \#
+          1                Bulbasaur
+          2                  Ivysaur
+          3                 Venusaur
+          3    VenusaurMega Venusaur
+          4               Charmander
+          Name: Name, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}149}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{Name}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}149}]:} \#
+          1                Bulbasaur
+          2                  Ivysaur
+          3                 Venusaur
+          3    VenusaurMega Venusaur
+          4               Charmander
+          Name: Name, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{pokemonDf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o+ow}{is} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{Name}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}150}]:} True
+\end{Verbatim}
+            
+    Úlohy:
+
+\begin{verbatim}
+<li>Vypíš prvé 3 riadky zo stĺpca Type 1 z dátového setu pokemonDf prostredníctvom []</li>
+<li>Vypíš posledné 2 riadky zo stĺpca Type 2 dátového setu pokemonDf prostredníctvom .</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{c+c1}{\PYZsh{}1}
+          \PY{n}{pokemonDf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Type 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}151}]:} \#
+          1    Grass
+          2    Grass
+          3    Grass
+          Name: Type 1, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{c+c1}{\PYZsh{}2}
+          \PY{n}{pokemonDf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Type 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}152}]:} \#
+          720     Dark
+          721    Water
+          Name: Type 2, dtype: object
+\end{Verbatim}
+            
+    Práca s riadkami
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}198}]:} \PY{n}{pokemonDf}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}198}]:}         Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  Sp. Def  \textbackslash{}
+          \#                                                                           
+          1  Bulbasaur  Grass  Poison    318  45      49       49       65       65   
+          
+             Speed  Generation  Legendary  
+          \#                                
+          1     45           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}201}]:} \PY{n}{pokemonDf}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}201}]:}         Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  Sp. Def  \textbackslash{}
+          \#                                                                           
+          1  Bulbasaur  Grass  Poison    318  45      49       49       65       65   
+          2    Ivysaur  Grass  Poison    405  60      62       63       80       80   
+          3   Venusaur  Grass  Poison    525  80      82       83      100      100   
+          
+             Speed  Generation  Legendary  
+          \#                                
+          1     45           1      False  
+          2     60           1      False  
+          3     80           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{n}{pokemonDf}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}203}]:}                     Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                              
+          2                Ivysaur  Grass  Poison    405  60      62       63       80   
+          3               Venusaur  Grass  Poison    525  80      82       83      100   
+          3  VenusaurMega Venusaur  Grass  Poison    625  80     100      123      122   
+          4             Charmander   Fire     NaN    309  39      52       43       60   
+          
+             Sp. Def  Speed  Generation  Legendary  
+          \#                                         
+          2       80     60           1      False  
+          3      100     80           1      False  
+          3      120     80           1      False  
+          4       50     65           1      False  
+\end{Verbatim}
+            
+    Úlohy:
+
+\begin{verbatim}
+<li>Vypíš všetky hodnoty od indexu 790 až po posledný z dátového setu pokemonDf</li>
+<li>Vypíš posledných 10 riadkov z dátového setu pokemonDf bez použitia tail()</li>
+<li>Vypíš prvé 4 riadky, z dátového setu pokemonDf bez použitia head()</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}204}]:} \PY{c+c1}{\PYZsh{}1}
+          \PY{n}{pokemonDf}\PY{p}{[}\PY{l+m+mi}{790}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}204}]:}                     Name   Type 1  Type 2  Total   HP  Attack  Defense  \textbackslash{}
+          \#                                                                        
+          714               Noibat   Flying  Dragon    245   40      30       35   
+          715              Noivern   Flying  Dragon    535   85      70       80   
+          716              Xerneas    Fairy     NaN    680  126     131       95   
+          717              Yveltal     Dark  Flying    680  126     131       95   
+          718     Zygarde50\% Forme   Dragon  Ground    600  108     100      121   
+          719              Diancie     Rock   Fairy    600   50     100      150   
+          719  DiancieMega Diancie     Rock   Fairy    700   50     160      110   
+          720  HoopaHoopa Confined  Psychic   Ghost    600   80     110       60   
+          720   HoopaHoopa Unbound  Psychic    Dark    680   80     160       60   
+          721            Volcanion     Fire   Water    600   80     110      120   
+          
+               Sp. Atk  Sp. Def  Speed  Generation  Legendary  
+          \#                                                    
+          714       45       40     55           6      False  
+          715       97       80    123           6      False  
+          716      131       98     99           6       True  
+          717      131       98     99           6       True  
+          718       81       95     95           6       True  
+          719      100      150     50           6       True  
+          719      160      110    110           6       True  
+          720      150      130     70           6       True  
+          720      170      130     80           6       True  
+          721      130       90     70           6       True  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}205}]:} \PY{c+c1}{\PYZsh{}2}
+          \PY{n}{pokemonDf}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}205}]:}                     Name   Type 1  Type 2  Total   HP  Attack  Defense  \textbackslash{}
+          \#                                                                        
+          714               Noibat   Flying  Dragon    245   40      30       35   
+          715              Noivern   Flying  Dragon    535   85      70       80   
+          716              Xerneas    Fairy     NaN    680  126     131       95   
+          717              Yveltal     Dark  Flying    680  126     131       95   
+          718     Zygarde50\% Forme   Dragon  Ground    600  108     100      121   
+          719              Diancie     Rock   Fairy    600   50     100      150   
+          719  DiancieMega Diancie     Rock   Fairy    700   50     160      110   
+          720  HoopaHoopa Confined  Psychic   Ghost    600   80     110       60   
+          720   HoopaHoopa Unbound  Psychic    Dark    680   80     160       60   
+          721            Volcanion     Fire   Water    600   80     110      120   
+          
+               Sp. Atk  Sp. Def  Speed  Generation  Legendary  
+          \#                                                    
+          714       45       40     55           6      False  
+          715       97       80    123           6      False  
+          716      131       98     99           6       True  
+          717      131       98     99           6       True  
+          718       81       95     95           6       True  
+          719      100      150     50           6       True  
+          719      160      110    110           6       True  
+          720      150      130     70           6       True  
+          720      170      130     80           6       True  
+          721      130       90     70           6       True  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{c+c1}{\PYZsh{}3}
+          \PY{n}{pokemonDf}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}206}]:}                     Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                              
+          1              Bulbasaur  Grass  Poison    318  45      49       49       65   
+          2                Ivysaur  Grass  Poison    405  60      62       63       80   
+          3               Venusaur  Grass  Poison    525  80      82       83      100   
+          3  VenusaurMega Venusaur  Grass  Poison    625  80     100      123      122   
+          
+             Sp. Def  Speed  Generation  Legendary  
+          \#                                         
+          1       65     45           1      False  
+          2       80     60           1      False  
+          3      100     80           1      False  
+          3      120     80           1      False  
+\end{Verbatim}
+            
+    Práca s .loc()
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}207}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}207}]:}                     Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                              
+          3               Venusaur  Grass  Poison    525  80      82       83      100   
+          3  VenusaurMega Venusaur  Grass  Poison    625  80     100      123      122   
+          
+             Sp. Def  Speed  Generation  Legendary  
+          \#                                         
+          3      100     80           1      False  
+          3      120     80           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}208}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}208}]:} Name          Bulbasaur
+          Type 1            Grass
+          Type 2           Poison
+          Total               318
+          HP                   45
+          Attack               49
+          Defense              49
+          Sp. Atk              65
+          Sp. Def              65
+          Speed                45
+          Generation            1
+          Legendary         False
+          Name: 1, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}209}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        KeyError                                  Traceback (most recent call last)
+
+        /anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py in \_has\_valid\_type(self, key, axis)
+       1505                 if not ax.contains(key):
+    -> 1506                     error()
+       1507             except TypeError as e:
+
+
+        /anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py in error()
+       1500                                .format(key=key,
+    -> 1501                                        axis=self.obj.\_get\_axis\_name(axis)))
+       1502 
+
+
+        KeyError: 'the label [0] is not in the [index]'
+
+        
+    During handling of the above exception, another exception occurred:
+
+
+        KeyError                                  Traceback (most recent call last)
+
+        <ipython-input-209-fad9ed6b4b11> in <module>()
+    ----> 1 pokemonDf.loc[0]
+    
+
+        /anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py in \_\_getitem\_\_(self, key)
+       1371 
+       1372             maybe\_callable = com.\_apply\_if\_callable(key, self.obj)
+    -> 1373             return self.\_getitem\_axis(maybe\_callable, axis=axis)
+       1374 
+       1375     def \_is\_scalar\_access(self, key):
+
+
+        /anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py in \_getitem\_axis(self, key, axis)
+       1624 
+       1625         \# fall thru to straight lookup
+    -> 1626         self.\_has\_valid\_type(key, axis)
+       1627         return self.\_get\_label(key, axis=axis)
+       1628 
+
+
+        /anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py in \_has\_valid\_type(self, key, axis)
+       1512                 raise
+       1513             except:
+    -> 1514                 error()
+       1515 
+       1516         return True
+
+
+        /anaconda3/lib/python3.6/site-packages/pandas/core/indexing.py in error()
+       1499                 raise KeyError(u"the label [\{key\}] is not in the [\{axis\}]"
+       1500                                .format(key=key,
+    -> 1501                                        axis=self.obj.\_get\_axis\_name(axis)))
+       1502 
+       1503             try:
+
+
+        KeyError: 'the label [0] is not in the [index]'
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}210}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}210}]:}                         Name Type 1  Type 2  Total  HP  Attack  Defense  \textbackslash{}
+          \#                                                                         
+          2                    Ivysaur  Grass  Poison    405  60      62       63   
+          3                   Venusaur  Grass  Poison    525  80      82       83   
+          3      VenusaurMega Venusaur  Grass  Poison    625  80     100      123   
+          4                 Charmander   Fire     NaN    309  39      52       43   
+          5                 Charmeleon   Fire     NaN    405  58      64       58   
+          6                  Charizard   Fire  Flying    534  78      84       78   
+          6  CharizardMega Charizard X   Fire  Dragon    634  78     130      111   
+          6  CharizardMega Charizard Y   Fire  Flying    634  78     104       78   
+          
+             Sp. Atk  Sp. Def  Speed  Generation  Legendary  
+          \#                                                  
+          2       80       80     60           1      False  
+          3      100      100     80           1      False  
+          3      122      120     80           1      False  
+          4       60       50     65           1      False  
+          5       80       65     80           1      False  
+          6      109       85    100           1      False  
+          6      130       85    100           1      False  
+          6      159      115    100           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}211}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Type 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}211}]:}   Type 1  Type 2  Total
+          \#                      
+          1  Grass  Poison    318
+          2  Grass  Poison    405
+          3  Grass  Poison    525
+          3  Grass  Poison    625
+          4   Fire     NaN    309
+          5   Fire     NaN    405
+          6   Fire  Flying    534
+          6   Fire  Dragon    634
+          6   Fire  Flying    634
+          7  Water     NaN    314
+          8  Water     NaN    405
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}212}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{712}\PY{p}{:}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Type 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}212}]:}      Type 2  Total   HP  Attack  Defense  Sp. Atk  Sp. Def  Speed  Generation  \textbackslash{}
+          \#                                                                               
+          712     NaN    304   55      69       85       32       35     28           6   
+          713     NaN    514   95     117      184       44       46     28           6   
+          714  Dragon    245   40      30       35       45       40     55           6   
+          715  Dragon    535   85      70       80       97       80    123           6   
+          716     NaN    680  126     131       95      131       98     99           6   
+          717  Flying    680  126     131       95      131       98     99           6   
+          718  Ground    600  108     100      121       81       95     95           6   
+          719   Fairy    600   50     100      150      100      150     50           6   
+          719   Fairy    700   50     160      110      160      110    110           6   
+          720   Ghost    600   80     110       60      150      130     70           6   
+          720    Dark    680   80     160       60      170      130     80           6   
+          721   Water    600   80     110      120      130       90     70           6   
+          
+               Legendary  
+          \#               
+          712      False  
+          713      False  
+          714      False  
+          715      False  
+          716       True  
+          717       True  
+          718       True  
+          719       True  
+          719       True  
+          720       True  
+          720       True  
+          721       True  
+\end{Verbatim}
+            
+    Práca s .iloc()
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}213}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}213}]:} Name          Bulbasaur
+          Type 1            Grass
+          Type 2           Poison
+          Total               318
+          HP                   45
+          Attack               49
+          Defense              49
+          Sp. Atk              65
+          Sp. Def              65
+          Speed                45
+          Generation            1
+          Legendary         False
+          Name: 1, dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}214}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}214}]:}         Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  Sp. Def  \textbackslash{}
+          \#                                                                           
+          1  Bulbasaur  Grass  Poison    318  45      49       49       65       65   
+          2    Ivysaur  Grass  Poison    405  60      62       63       80       80   
+          3   Venusaur  Grass  Poison    525  80      82       83      100      100   
+          
+             Speed  Generation  Legendary  
+          \#                                
+          1     45           1      False  
+          2     60           1      False  
+          3     80           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}215}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}215}]:}                     Name Type 1  Type 2
+          \#                                      
+          1              Bulbasaur  Grass  Poison
+          2                Ivysaur  Grass  Poison
+          3               Venusaur  Grass  Poison
+          3  VenusaurMega Venusaur  Grass  Poison
+          4             Charmander   Fire     NaN
+\end{Verbatim}
+            
+    Úlohy:
+
+\begin{verbatim}
+<li>Vypíš prvých 7 riadkov a prvé 3 stĺpce z dátového setu pokemonDf</li>
+<li>Vypíš riadky po label 4 od labelu 1 pomocou .loc</li>
+<li>Vypíš prvé 3 riadky pomocou metódy .iloc</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}216}]:} \PY{c+c1}{\PYZsh{}1}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{7}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}216}]:}                     Name Type 1  Type 2
+          \#                                      
+          1              Bulbasaur  Grass  Poison
+          2                Ivysaur  Grass  Poison
+          3               Venusaur  Grass  Poison
+          3  VenusaurMega Venusaur  Grass  Poison
+          4             Charmander   Fire     NaN
+          5             Charmeleon   Fire     NaN
+          6              Charizard   Fire  Flying
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{c+c1}{\PYZsh{}2}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}217}]:}                     Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                              
+          1              Bulbasaur  Grass  Poison    318  45      49       49       65   
+          2                Ivysaur  Grass  Poison    405  60      62       63       80   
+          3               Venusaur  Grass  Poison    525  80      82       83      100   
+          3  VenusaurMega Venusaur  Grass  Poison    625  80     100      123      122   
+          4             Charmander   Fire     NaN    309  39      52       43       60   
+          
+             Sp. Def  Speed  Generation  Legendary  
+          \#                                         
+          1       65     45           1      False  
+          2       80     60           1      False  
+          3      100     80           1      False  
+          3      120     80           1      False  
+          4       50     65           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}218}]:} \PY{c+c1}{\PYZsh{}3}
+          \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}218}]:}         Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  Sp. Def  \textbackslash{}
+          \#                                                                           
+          1  Bulbasaur  Grass  Poison    318  45      49       49       65       65   
+          2    Ivysaur  Grass  Poison    405  60      62       63       80       80   
+          3   Venusaur  Grass  Poison    525  80      82       83      100      100   
+          
+             Speed  Generation  Legendary  
+          \#                                
+          1     45           1      False  
+          2     60           1      False  
+          3     80           1      False  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}219}]:} \PY{n}{pokemonDf}\PY{p}{[}\PY{n}{pokemonDf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Type 1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Grass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}219}]:}                      Name Type 1  Type 2  Total  HP  Attack  Defense  Sp. Atk  \textbackslash{}
+          \#                                                                               
+          1               Bulbasaur  Grass  Poison    318  45      49       49       65   
+          2                 Ivysaur  Grass  Poison    405  60      62       63       80   
+          3                Venusaur  Grass  Poison    525  80      82       83      100   
+          3   VenusaurMega Venusaur  Grass  Poison    625  80     100      123      122   
+          43                 Oddish  Grass  Poison    320  45      50       55       75   
+          
+              Sp. Def  Speed  Generation  Legendary  
+          \#                                          
+          1        65     45           1      False  
+          2        80     60           1      False  
+          3       100     80           1      False  
+          3       120     80           1      False  
+          43       65     30           1      False  
+\end{Verbatim}
+            
+    Úlohy:
+
+\begin{verbatim}
+<li>Vypíš prvých 5 pokémonov, ktorí majú HP vyššiu ako 60</li>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}220}]:} \PY{c+c1}{\PYZsh{}1}
+          \PY{n}{pokemonDf}\PY{p}{[}\PY{n}{pokemonDf}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{HP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{60}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}220}]:}                         Name Type 1  Type 2  Total  HP  Attack  Defense  \textbackslash{}
+          \#                                                                         
+          3                   Venusaur  Grass  Poison    525  80      82       83   
+          3      VenusaurMega Venusaur  Grass  Poison    625  80     100      123   
+          6                  Charizard   Fire  Flying    534  78      84       78   
+          6  CharizardMega Charizard X   Fire  Dragon    634  78     130      111   
+          6  CharizardMega Charizard Y   Fire  Flying    634  78     104       78   
+          
+             Sp. Atk  Sp. Def  Speed  Generation  Legendary  
+          \#                                                  
+          3      100      100     80           1      False  
+          3      122      120     80           1      False  
+          6      109       85    100           1      False  
+          6      130       85    100           1      False  
+          6      159      115    100           1      False  
+\end{Verbatim}
+            
+    Práca s .values
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}221}]:} array([['Bulbasaur', 'Grass', 'Poison', {\ldots}, 45, 1, False],
+                 ['Ivysaur', 'Grass', 'Poison', {\ldots}, 60, 1, False],
+                 ['Venusaur', 'Grass', 'Poison', {\ldots}, 80, 1, False],
+                 {\ldots},
+                 ['HoopaHoopa Confined', 'Psychic', 'Ghost', {\ldots}, 70, 6, True],
+                 ['HoopaHoopa Unbound', 'Psychic', 'Dark', {\ldots}, 80, 6, True],
+                 ['Volcanion', 'Fire', 'Water', {\ldots}, 70, 6, True]], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}222}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}222}]:} array(['Bulbasaur', 'Grass', 'Poison', 318, 45, 49, 49, 65, 65, 45, 1,
+                 False], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}223}]:} 'Grass'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}224}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}224}]:} array(['Bulbasaur', 'Grass', 'Poison'], dtype=object)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}225}]:} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}225}]:} \#                 1        2         3                      3           4    \textbackslash{}
+          Name        Bulbasaur  Ivysaur  Venusaur  VenusaurMega Venusaur  Charmander   
+          Type 1          Grass    Grass     Grass                  Grass        Fire   
+          Type 2         Poison   Poison    Poison                 Poison         NaN   
+          Total             318      405       525                    625         309   
+          HP                 45       60        80                     80          39   
+          Attack             49       62        82                    100          52   
+          Defense            49       63        83                    123          43   
+          Sp. Atk            65       80       100                    122          60   
+          Sp. Def            65       80       100                    120          50   
+          Speed              45       60        80                     80          65   
+          Generation          1        1         1                      1           1   
+          Legendary       False    False     False                  False       False   
+          
+          \#                  5          6                          6    \textbackslash{}
+          Name        Charmeleon  Charizard  CharizardMega Charizard X   
+          Type 1            Fire       Fire                       Fire   
+          Type 2             NaN     Flying                     Dragon   
+          Total              405        534                        634   
+          HP                  58         78                         78   
+          Attack              64         84                        130   
+          Defense             58         78                        111   
+          Sp. Atk             80        109                        130   
+          Sp. Def             65         85                         85   
+          Speed               80        100                        100   
+          Generation           1          1                          1   
+          Legendary        False      False                      False   
+          
+          \#                                 6         7      {\ldots}         714      715  \textbackslash{}
+          Name        CharizardMega Charizard Y  Squirtle    {\ldots}      Noibat  Noivern   
+          Type 1                           Fire     Water    {\ldots}      Flying   Flying   
+          Type 2                         Flying       NaN    {\ldots}      Dragon   Dragon   
+          Total                             634       314    {\ldots}         245      535   
+          HP                                 78        44    {\ldots}          40       85   
+          Attack                            104        48    {\ldots}          30       70   
+          Defense                            78        65    {\ldots}          35       80   
+          Sp. Atk                           159        50    {\ldots}          45       97   
+          Sp. Def                           115        64    {\ldots}          40       80   
+          Speed                             100        43    {\ldots}          55      123   
+          Generation                          1         1    {\ldots}           6        6   
+          Legendary                       False     False    {\ldots}       False    False   
+          
+          \#               716      717               718      719                  719  \textbackslash{}
+          Name        Xerneas  Yveltal  Zygarde50\% Forme  Diancie  DiancieMega Diancie   
+          Type 1        Fairy     Dark            Dragon     Rock                 Rock   
+          Type 2          NaN   Flying            Ground    Fairy                Fairy   
+          Total           680      680               600      600                  700   
+          HP              126      126               108       50                   50   
+          Attack          131      131               100      100                  160   
+          Defense          95       95               121      150                  110   
+          Sp. Atk         131      131                81      100                  160   
+          Sp. Def          98       98                95      150                  110   
+          Speed            99       99                95       50                  110   
+          Generation        6        6                 6        6                    6   
+          Legendary      True     True              True     True                 True   
+          
+          \#                           720                 720        721  
+          Name        HoopaHoopa Confined  HoopaHoopa Unbound  Volcanion  
+          Type 1                  Psychic             Psychic       Fire  
+          Type 2                    Ghost                Dark      Water  
+          Total                       600                 680        600  
+          HP                           80                  80         80  
+          Attack                      110                 160        110  
+          Defense                      60                  60        120  
+          Sp. Atk                     150                 170        130  
+          Sp. Def                     130                 130         90  
+          Speed                        70                  80         70  
+          Generation                    6                   6          6  
+          Legendary                  True                True       True  
+          
+          [12 rows x 800 columns]
+\end{Verbatim}
+            
+    Export dát
+
+Rovnako ako dáta z rôznych formátov importujeme, v pandase je možné ich
+exportovať. Na export dát využívame podľa dátového typu tieto príkazy:
+
+    Export dát do CSV súboru
+
+df.to\_csv(filename)
+
+Export dát do excel súboru
+
+df.to\_excel(filename)
+
+Export dát do SQL tabuľky
+
+df.to\_sql(table\_name, connection\_object)
+
+Export dát do JSONu
+
+df.to\_json(filename)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}226}]:} \PY{n}{transPokemonDf} \PY{o}{=} \PY{n}{pokemonDf}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}227}]:} \PY{n}{transPokemonDf}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csvs/transPokemon.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}228}]:} \PY{n}{newDf} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csvs/Pokemon.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{usecols}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Type 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}229}]:} \PY{n}{newDf}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}229}]:}    \# Type 1  Type 2
+          0  1  Grass  Poison
+          1  2  Grass  Poison
+          2  3  Grass  Poison
+          3  3  Grass  Poison
+          4  4   Fire     NaN
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
